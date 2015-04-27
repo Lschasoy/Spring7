@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Busqueda Peliculas Ajax</title>
+        <link rel="stylesheet" href="Estilos.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="form1">
+            <table border="1">
+                <tr>
+                    <td>Introduzca un titulo</td>
+                    <td>
+                        <h:inputText id="nombreFiltro" 
+                                    autocomplete="off" 
+                                    value="#{TablaBean.titulo}"  >
+                            <f:ajax render="tablapelis" event="keyup" 
+                                    listener="#{TablaBean.buscarTituloListener()}"/> 
+                        </h:inputText>                        
+                    </td>
+                </tr>
+            </table>
+            
+            <h:dataTable value="#{TablaBean.listapeliculas}" border="1" var="filapeli" id="tablapelis">
+                <h:column>
+                    <f:facet name="header">
+                        CARTEL
+                    </f:facet>
+                    <h:graphicImage alt="#{filapeli.titulo}"
+                                    value="CARTELES/#{filapeli.cartel}"
+                                    width="60" height="80"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Titulo
+                    </f:facet>
+                    <h:outputText value="#{filapeli.titulo}" /> 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Director
+                    </f:facet>
+                    <h:outputText value="#{filapeli.director}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Precio
+                    </f:facet>
+                    <h:outputText value="#{filapeli.precio}€" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
